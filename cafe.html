@@ -60,13 +60,10 @@
             right: 10px;
         }
 
-        /* Mobile (phones): move arrows to bottom */
+        /* Keep arrows vertically centered at all resolutions; only adjust size on small screens */
         @media (max-width: 600px) {
             .nav-arrow {
-                top: auto;
-                bottom: 10px;
-                transform: none;
-                width: 30px;
+                width: 36px;
             }
         }
 
@@ -370,14 +367,14 @@
 
         .menu-nav-btn img {
             display: block;
-            max-width: 120px;
+            max-width: 180px;
             width: 100%;
             height: auto;
         }
 
         @media (max-width: 480px) {
             .menu-nav-btn img {
-                max-width: 90px;
+                max-width: 120px;
             }
 
             /* smaller on phones */
