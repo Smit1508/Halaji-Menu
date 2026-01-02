@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Choose Menu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url(Homepage/1.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            margin-bottom: 24px;
+            color: #123757;
+            text-align: center;
+            font-size: 28px;
+        }
+
+        .menu-buttons {
+            display: flex;
+            flex-direction: column;
+            /* always stacked vertically */
+            align-items: center;
+            gap: 14px;
+            width: 100%;
+            max-width: 320px;
+            /* controls button max width */
+            box-sizing: border-box;
+        }
+
+        .menu-buttons a {
+            display: block;
+            width: 100%;
+            padding: 0;
+            text-decoration: none;
+            text-align: center;
+            max-width: 260px;
+            margin: 0 auto;
+        }
+
+        .menu-buttons a img {
+            display: block;
+            width: 100%;
+            max-width: 260px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+            transition: transform 0.12s, box-shadow 0.12s;
+        }
+
+        .menu-buttons a:focus img,
+        .menu-buttons a:hover img {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 22px;
+            }
+
+            .menu-buttons {
+                max-width: 260px;
+                gap: 12px;
+                margin: 0 auto;
+                /* ensure container is centered */
+                width: auto;
+            }
+
+            .menu-buttons a img {
+                max-width: 200px;
+            }
+
+            .menu-buttons a {
+                font-size: 16px;
+                margin: 0 auto;
+                /* ensure anchors are centered */
+                display: block;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Choose Your Menu</h1>
+    <div class="menu-buttons" role="navigation" aria-label="Choose menu">
+        <a href="restaurant.html" aria-label="Restaurant menu">
+            <img src="Homepage/2.png" alt="Restaurant Menu">
+        </a>
+        <a href="cafe.html" aria-label="Cafeteria menu">
+            <img src="Homepage/3.png" alt="Cafeteria Menu">
+        </a>
+    </div>
+</body>
+
+</html>
