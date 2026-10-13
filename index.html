@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu</title>
+    <meta name="theme-color" content="#111111">
+    <title>Our Menu</title>
 
     <style>
         * {
@@ -13,44 +14,87 @@
             box-sizing: border-box;
         }
 
+        html {
+            width: 100%;
+            background: #111;
+            scroll-behavior: smooth;
+        }
+
         body {
+            width: 100%;
             min-height: 100vh;
-            min-height: 100dvh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #ffffff;
-            background-image: url("logo.png");
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain;
+            background: #111;
+            overflow-x: hidden;
             font-family: Arial, sans-serif;
         }
 
-        .menu-button {
+        /* Full-width, continuous menu pages */
+        .menu-viewer {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .menu-page {
+            display: block;
+            width: 100%;
+            height: auto;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            object-fit: contain;
+        }
+
+        /* Close button */
+        .close-button {
             position: fixed;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 15px 50px;
-            background-color: #111111;
-            color: #ffffff;
+            top: 16px;
+            left: 16px;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 44px;
+            height: 44px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.75);
+            color: white;
+            font-size: 27px;
             text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            border-radius: 6px;
-            transition: background-color 0.2s ease;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
-        .menu-button:hover {
-            background-color: #444444;
+        .close-button:hover {
+            background: #333;
         }
 
-        @media (max-width: 600px) {
-            .menu-button {
-                bottom: 25px;
-                padding: 14px 45px;
+        /* Loading and error messages */
+        .status {
+            padding: 30px 15px;
+            color: #fff;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .status a {
+            color: #fff;
+        }
+
+        @media print {
+            .close-button,
+            .status {
+                display: none;
+            }
+
+            html,
+            body {
+                background: white;
+            }
+
+            .menu-page {
+                width: 100%;
+                break-inside: avoid;
             }
         }
     </style>
@@ -58,12 +102,48 @@
 
 <body>
 
-    <a class="menu-button"
-       href="menu/menu.pdf"
-       target="_blank"
-       rel="noopener">
-        MENU
-    </a>
+    <a href="index.html" class="close-button"
+       aria-label="Close menu" title="Back to home">&times;</a>
+
+    <main class="menu-viewer" id="menuViewer"></main>
+
+    <script>
+        const viewer = document.getElementById("menuViewer");
+
+        // Change this number to match your total JPG pages.
+        const totalPages = 3;
+
+        function showStatus(message) {
+            const status = document.createElement("div");
+            status.className = "status";
+            status.textContent = message;
+            viewer.appendChild(status);
+        }
+
+        for (let i = 1; i <= totalPages; i++) {
+            const img = document.createElement("img");
+
+            img.className = "menu-page";
+            img.src = `menu/${i}.jpg`;
+            img.alt = `Menu page ${i}`;
+            img.loading = i === 1 ? "eager" : "lazy";
+            img.decoding = "async";
+
+            img.onerror = function () {
+                this.remove();
+                showStatus(`Could not load menu/${i}.jpg`);
+            };
+
+            viewer.appendChild(img);
+        }
+
+        // Close with Escape, like a document viewer.
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") {
+                window.location.href = "index.html";
+            }
+        });
+    </script>
 
 </body>
 </html>
